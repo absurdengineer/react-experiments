@@ -1,12 +1,12 @@
 import { ChangeEvent } from "react";
-import useLocalStorage from "./hooks/useLocalStorage";
+import useSessionStorage from "./hooks/useSessionStorage";
 
 interface HandleChange {
   (event: ChangeEvent<HTMLInputElement>): void;
 }
 
 const App = () => {
-  const [name, setName, deleteName] = useLocalStorage("name", "Dilshad");
+  const [name, setName, deleteName] = useSessionStorage("name", "Dilshad");
 
   const handleChange: HandleChange = (event) => {
     setName(event.target.value);
