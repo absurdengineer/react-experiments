@@ -1,22 +1,15 @@
-import { ChangeEvent } from "react";
-import useSessionStorage from "./hooks/useSessionStorage";
-
-interface HandleChange {
-  (event: ChangeEvent<HTMLInputElement>): void;
-}
+import useAxios from "./hooks/useAxios";
 
 const App = () => {
-  const [name, setName, deleteName] = useSessionStorage("name", "Dilshad");
-
-  const handleChange: HandleChange = (event) => {
-    setName(event.target.value);
-  };
+  const [response, error] = useAxios({
+    method: "GET",
+    url: "/todos",
+  });
 
   return (
     <>
-      <h1>Hello {name}</h1>
-      <input type="text" value={name} onChange={handleChange} />
-      <button onClick={deleteName}>Delete Name</button>
+      <div>{JSON.stringify(response)}</div>
+      {error && <div>{JSON.stringify(error)}</div>}
     </>
   );
 };
