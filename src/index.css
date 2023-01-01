@@ -1,0 +1,30 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.viewbox {
+  height: 100vh;
+  padding: 20px;
+}
+.darkviewbox {
+  color: #fff;
+  background-color: #000;
+}
+.lightviewbox {
+  color: #000;
+  background-color: #fff;
+}
+.button {
+  padding: 5px 10px;
+  font-size: 20px;
+  border-radius: 10px;
+}
+
+.darkbutton {
+  color: #fff;
+  background-color: #000;
+}
+.lightbutton {
+  color: #000;
+  background-color: #fff;
+}
