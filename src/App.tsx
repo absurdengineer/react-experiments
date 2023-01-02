@@ -1,51 +1,24 @@
-import useTranslation from "./hooks/useTranslation";
-import { availableLocales, defaultLocale } from "./locale";
+import { ChangeEvent } from "react";
+import useCookie from "./hooks/useCookie";
+
+interface HandleChange {
+  (event: ChangeEvent<HTMLInputElement>): void;
+}
 
 const App = () => {
-  const { t, locale, setLocale } = useTranslation();
+  const [name, setName, deleteName] = useCookie("name", "Dilshad");
+
+  const handleChange: HandleChange = (event) => {
+    setName(event.target.value);
+  };
 
   return (
     <>
-      <h1>{t("messages.hi")}</h1>
-      <h2
-        style={{
-          margin: "10px",
-        }}
-      >
-        Locales :
-      </h2>
-      <button
-        style={{
-          margin: "10px",
-          padding: "5px 10px",
-        }}
-        disabled={locale === defaultLocale}
-        // Unnecessary payload(need to fix it)
-        onClick={() => setLocale({ type: "RESET", payload: defaultLocale })}
-      >
-        Reset
-      </button>
-      <ul>
-        {availableLocales.map((availableLocale) => (
-          <li
-            style={{
-              cursor: "pointer",
-              border: "2px solid black",
-              padding: "10px",
-              margin: "10px",
-              color: locale === availableLocale.value ? "white" : "black",
-              backgroundColor:
-                locale === availableLocale.value ? "green" : "transparent",
-            }}
-            onClick={() =>
-              setLocale({ type: "CHANGE", payload: availableLocale.value })
-            }
-          >
-            {availableLocale.name}
-            {locale === availableLocale.value && " (Selected)"}
-          </li>
-        ))}
-      </ul>
+      <>
+        <h1>Hello {name}</h1>
+        <input type="text" value={name} onChange={handleChange} />
+        <button onClick={deleteName}>Delete Name</button>
+      </>
     </>
   );
 };
